@@ -11,7 +11,7 @@ import java.util.Arrays;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    @Value("${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173}")
+    @Value("${app.cors.allowed-origins:http://localhost:5173}")
     private String allowedOrigins;
     
 

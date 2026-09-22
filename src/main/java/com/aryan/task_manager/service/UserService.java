@@ -8,6 +8,7 @@ import com.aryan.task_manager.repository.ProjectRepository;
 import com.aryan.task_manager.repository.TaskRepository;
 import com.aryan.task_manager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public UserResponse createUser(UserRequest request){
@@ -34,7 +36,9 @@ public class UserService {
 
         User user=User.builder()
                 .name(request.getName().trim())
-                .email(email)
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
                 .build();
 
         User savedUser=userRepository.save(user);

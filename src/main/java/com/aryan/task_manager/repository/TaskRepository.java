@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Modifying;
 
+import java.util.List;
+
 public interface TaskRepository
         extends JpaRepository<Task,Long>{
-
-        boolean existsByProjectId(Long projectId);
 
         @Modifying
         @Query("UPDATE Task t SET t.assignedTo = NULL WHERE t.assignedTo.id = :userId")
@@ -39,4 +39,14 @@ public interface TaskRepository
             @Param("title") String title,
             Pageable pageable
             );
+
+    List<Task> findByAssignedToId(Long userId);
+
+    List<Task> findByProjectId(Long projectId);
+
+    boolean existsByProjectId(Long projectId);
+
+    boolean existsByAssignedToId(Long userId);
+
+    void deleteByProjectId(Long projectId);
 }

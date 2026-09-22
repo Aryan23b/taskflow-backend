@@ -1,6 +1,7 @@
 package com.aryan.task_manager.dto;
 
 
+import com.aryan.task_manager.enums.Role;
 import lombok.*;
 
 @Getter
@@ -13,4 +14,5 @@ public class UserResponse {
     private Long id;
     private String name;
     private String email;
+    private Role role;
 }
